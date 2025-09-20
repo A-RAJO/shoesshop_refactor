@@ -18,16 +18,28 @@ bin/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
-.idea
+
+# IntelliJ IDEA 관련 개인/환경 설정 제외
+.idea/
 *.iws
 *.iml
 *.ipr
+
+# 빌드, 캐시 폴더 제외
 out/
+target/
+
+# 예외: 소스 폴더 내 out 디렉토리는 제외하지 않음
 !**/src/main/**/out/
 !**/src/test/**/out/
+
+
+### log 파일 무시###
 *.log
 logs/test.log
 *.yaml
+
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
