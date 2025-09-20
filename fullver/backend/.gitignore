@@ -34,11 +34,6 @@ target/
 !**/src/test/**/out/
 
 
-### log 파일 무시###
-*.log
-logs/test.log
-*.yaml
-
 
 ### NetBeans ###
 /nbproject/private/
