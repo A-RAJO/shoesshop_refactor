@@ -2,24 +2,26 @@ spring:
   application:
     name: shoesShopRefactor
 
-  profiles:
-    include: dev
-
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: validate
+    show-sql: false
 
     logging:
       config: classpath:logback-spring-local.xml
 
+      datasource:
+        url: jdbc:mysql://localhost:3306/mydb?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+        username: root
+        password: yoonluka2507
+        driver-class-name: com.mysql.cj.jdbc.Driver
 
 
-
-
-
-
-
+#  datasource:
+#    url: jdbc:mariadb://database-1.cn6ioosku2ij.ap-northeast-2.rds.amazonaws.com/supercoding_team1
+#    username: ${RDS_USERNAME}
+#    password: ${RDS_PASSWORD}
+#    driver-class-name: org.mariadb.jdbc.Driver
 
 #
 #  servlet:
