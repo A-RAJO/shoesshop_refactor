@@ -1,0 +1,46 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+
+# IntelliJ IDEA 관련 개인/환경 설정 제외
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# 빌드, 캐시 폴더 제외
+out/
+target/
+
+# 예외: 소스 폴더 내 out 디렉토리는 제외하지 않음
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
