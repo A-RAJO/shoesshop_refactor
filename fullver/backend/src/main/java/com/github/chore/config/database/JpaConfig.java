@@ -17,7 +17,7 @@ import java.util.Map;
 
 @Configuration
 @EnableJpaRepositories(
-        basePackages = "com.github.chore.repository",   // JPA Repository 경로
+        basePackages = "com.github.chore.repository",
         entityManagerFactoryRef = "entityManagerFactory",
         transactionManagerRef = "jpaTransactionManager"
 )
@@ -30,7 +30,7 @@ public class JpaConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(mysqlDataSource);
-        emf.setPackagesToScan("com.github.chore.entity"); // 엔티티 패키지
+        emf.setPackagesToScan("com.github.chore.entity");
 
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         emf.setJpaVendorAdapter(jpaVendorAdapter);
@@ -38,7 +38,7 @@ public class JpaConfig {
         Map<String, Object> properties = new HashMap<>();
         properties.put("hibernate.format_sql", true);
         properties.put("hibernate.use_sql_comments", true);
-        properties.put("hibernate.hbm2ddl.auto", "update"); // 개발용: update / 운영용: validate
+        properties.put("hibernate.hbm2ddl.auto", "update"); // 개발: update / 운영: validate
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
 
         emf.setJpaPropertyMap(properties);
@@ -47,7 +47,8 @@ public class JpaConfig {
 
     @Bean(name = "jpaTransactionManager")
     @Primary
-    public PlatformTransactionManager jpaTransactionManager(@Qualifier("entityManagerFactory") LocalContainerEntityManagerFactoryBean emf) {
+    public PlatformTransactionManager jpaTransactionManager(
+            @Qualifier("entityManagerFactory") LocalContainerEntityManagerFactoryBean emf) {
         return new JpaTransactionManager(emf.getObject());
     }
 }
