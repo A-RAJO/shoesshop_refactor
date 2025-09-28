@@ -8,13 +8,8 @@ spring:
     show-sql: false
 
     logging:
-      config: classpath:logback-spring-local.xml
+      config: classpath:logback-spring-prod.xml
 
-      datasource:
-        url: jdbc:mysql://localhost:3306/mydb?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-        username: root
-        password: yoonluka2507
-        driver-class-name: com.mysql.cj.jdbc.Driver
 
 
 #  datasource:

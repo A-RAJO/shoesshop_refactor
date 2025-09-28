@@ -19,7 +19,8 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
 
 
-
+    logging:
+      config: classpath:logback-spring-dev.xml
 
 #  datasource:
 #    url: jdbc:mariadb://database-1.cn6ioosku2ij.ap-northeast-2.rds.amazonaws.com/supercoding_team1
