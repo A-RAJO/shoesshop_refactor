@@ -1,50 +1,53 @@
-//package com.github.chore.config;
-//
-//
-//import org.springframework.beans.factory.annotation.Qualifier;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.context.annotation.Primary;
-//import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-//import org.springframework.orm.jpa.JpaTransactionManager;
-//import org.springframework.orm.jpa.JpaVendorAdapter;
-//import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-//import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-//import org.springframework.transaction.PlatformTransactionManager;
-//
-//import javax.sql.DataSource;
-//import java.util.HashMap;
-//import java.util.Map;
-//
-//@Configuration
-//@EnableJpaRepositories(
-//        basePackages = "com.github.chore.repository",
-//        entityManagerFactoryRef = "localContainerEntityManagerFactoryBean",
-//        transactionManagerRef = "tmJpa"
-//)
-//public class JpaConfig {
-//    @Bean
-//    public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean(@Qualifier("dataSource")DataSource dataSource) {
-//        LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-//        localContainerEntityManagerFactoryBean.setDataSource(dataSource);
-//        localContainerEntityManagerFactoryBean.setPackagesToScan("com.github.supercodingteam1.repository");
-//
-//        JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
-//        localContainerEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
-//
-//        Map<String, Object> properties = new HashMap<>();
-//        properties.put("hibernate.format_sql",true);
-//        properties.put("hibernate.use_sql_comments",true);
-//
-//        localContainerEntityManagerFactoryBean.setJpaPropertyMap(properties);
-//        return localContainerEntityManagerFactoryBean;
-//    }
-//
-//    @Bean(name = "tmJpa")
-//    @Primary
-//    public PlatformTransactionManager transactionManager(@Qualifier("dataSource") DataSource dataSource) {
-//        JpaTransactionManager transactionManager = new JpaTransactionManager();
-//        transactionManager.setEntityManagerFactory(localContainerEntityManagerFactoryBean(dataSource).getObject());
-//        return transactionManager;
-//    }
-//}
+package com.github.chore.config.database;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
+
+import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
+
+@Configuration
+@EnableJpaRepositories(
+        basePackages = "com.github.chore.repository",   // JPA Repository 경로
+        entityManagerFactoryRef = "entityManagerFactory",
+        transactionManagerRef = "jpaTransactionManager"
+)
+@RequiredArgsConstructor
+public class JpaConfig {
+
+    private final @Qualifier("mysqlDataSource") DataSource mysqlDataSource;
+
+    @Bean(name = "entityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
+        emf.setDataSource(mysqlDataSource);
+        emf.setPackagesToScan("com.github.chore.entity"); // 엔티티 패키지
+
+        HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
+        emf.setJpaVendorAdapter(jpaVendorAdapter);
+
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("hibernate.format_sql", true);
+        properties.put("hibernate.use_sql_comments", true);
+        properties.put("hibernate.hbm2ddl.auto", "update"); // 개발용: update / 운영용: validate
+        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
+
+        emf.setJpaPropertyMap(properties);
+        return emf;
+    }
+
+    @Bean(name = "jpaTransactionManager")
+    @Primary
+    public PlatformTransactionManager jpaTransactionManager(@Qualifier("entityManagerFactory") LocalContainerEntityManagerFactoryBean emf) {
+        return new JpaTransactionManager(emf.getObject());
+    }
+}
