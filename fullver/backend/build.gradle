@@ -36,6 +36,11 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-j'  // ✅ MySQL 드라이버
     runtimeOnly 'com.h2database:h2'        // ✅ H2 (개발/테스트용)
 
+    // redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.session:spring-session-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
 
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
