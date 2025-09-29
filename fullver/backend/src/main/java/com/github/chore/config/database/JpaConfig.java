@@ -30,7 +30,7 @@ public class JpaConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(mysqlDataSource);
-        emf.setPackagesToScan("com.github.chore.entity");
+        emf.setPackagesToScan("com.github.chore.repository.entity");
 
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         emf.setJpaVendorAdapter(jpaVendorAdapter);
