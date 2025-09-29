@@ -1,44 +1,46 @@
-//package com.github.chore.repository.entity.image;
-//
-//import com.github.chore.repository.entity.item.Item;
-//import jakarta.persistence.*;
-//import lombok.*;
-//
-//@Getter
-//@Setter
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Builder
-//@Table(name = "images")
-//@Entity
-//public class Image {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "image_id", nullable = false, length = 11)
-//    private Integer imageId;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "item_id", nullable = false)
-//    private Item item;
-//
-//    @Column(name = "image_link",nullable = false)
-//    private String imageLink;
-//
-//    @Builder.Default
-//    @Column(name="image_first", nullable = false)
-//    private Boolean imageFirst = false;
-//
-//    @Override
-//    public String toString() {
-//        return "Image{" +
-//                ", item=" + item.getItemName() +
-//                ",\n imageLink='" + imageLink + '\'' +
-//                ",\n imageFirst=" + imageFirst +
-//                "}\n";
-//    }
-//}
-//
-///*
-//JPA에서는 JDBC( Mybatis )를 사용했을 때와 달리 연관 관계에 있는 상대 테이블의 PK를 멤버변수로 갖지 않고, 엔티티 객체 자체를 통째로 참조합니다.
-//https://victorydntmd.tistory.com/208
-// */
+package com.github.chore.repository.entity.image;
+
+import com.github.chore.repository.entity.option.ShoeOption;
+import jakarta.persistence.*;
+import lombok.*;
+
+import javax.imageio.ImageTypeSpecifier;
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Table(name = "image")
+@Entity
+public class Image {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "image_id", nullable = false)
+    private Integer imageId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shoe_option", nullable = false)
+    private ShoeOption shoeOption;
+
+    @Column(name = "file_name",nullable = false, length = 100)
+    private String file_name;
+
+    @Column(name = "image_link",length = 500)
+    private String imageLink;
+
+    @Column(name="image_type")
+    private ImageType imageType;
+
+    @Builder.Default // 필드에 기본값이 필요하면서 @Builder를 쓰고 싶을 때 사용. 보통 빌더는 초기값 안 넣으면 null 처리함
+    @Column(name="is_primary", nullable = false)
+    private Boolean isPrimary = false;
+
+    @Column(name = "created_at", nullable = false, updatable = false) // 자동 입력 기능 필요 : @LastModifiedDate와 Auditing 설정
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+}
