@@ -1,6 +1,6 @@
 package com.github.chore.repository.entity.cart;
 
-import com.github.chore.repository.entity.option.ShoeOption;
+import com.github.chore.repository.entity.shoe_option.ShoeOption;
 import com.github.chore.repository.entity.user.User;
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,17 +1,14 @@
 package com.github.chore.repository.entity.shoe;
 
 import com.github.chore.repository.entity.category.Category;
-import com.github.chore.repository.entity.image.Image;
-import com.github.chore.repository.entity.option.ShoeOption;
+import com.github.chore.repository.entity.shoe_option.ShoeOption;
 import com.github.chore.repository.entity.seller.Seller;
 import com.github.chore.repository.entity.user.User;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.web.bind.annotation.BindParam;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter

@@ -1,10 +1,9 @@
 package com.github.chore.repository.entity.image;
 
-import com.github.chore.repository.entity.option.ShoeOption;
+import com.github.chore.repository.entity.shoe_option.ShoeOption;
 import jakarta.persistence.*;
 import lombok.*;
 
-import javax.imageio.ImageTypeSpecifier;
 import java.time.LocalDateTime;
 
 @Getter

@@ -1,4 +1,4 @@
-package com.github.chore.repository.entity.option;
+package com.github.chore.repository.entity.shoe_option;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
