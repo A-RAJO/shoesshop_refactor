@@ -15,9 +15,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Table(name = "shoe")
 @Entity
 public class Shoe {
