@@ -1,6 +1,8 @@
 package com.github.chore.repository.entity.seller;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface SellerRepository extends JpaRepository<Integer, Seller> {
+@Repository
+public interface SellerRepository extends JpaRepository<Seller,Integer> {
 }
