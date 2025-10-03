@@ -86,8 +86,6 @@ public class ShoeOption {
         this.sku = sb.toString();
     }
 
-
-
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();

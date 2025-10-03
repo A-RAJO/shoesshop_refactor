@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import static com.github.chore.repository.entity.shoe_detail.Season.ALL_SEASON;
 
