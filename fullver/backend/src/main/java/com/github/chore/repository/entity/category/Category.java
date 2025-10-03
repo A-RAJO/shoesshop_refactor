@@ -44,7 +44,7 @@ public class Category {
     private String categoryPath;
 
     @OneToOne
-    @JoinColumn(name = "category")
+    @JoinColumn(name = "category", insertable=false, updatable=false)
     private Category category;
 
     @Column(name = "created_at", nullable = false, updatable = false) // 자동 입력 기능 필요 : @LastModifiedDate와 Auditing 설정
