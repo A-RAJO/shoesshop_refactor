@@ -5,6 +5,11 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+
+# IntelliJ GUI Designer
+*.form
+uidesigner.xml
+
 ### STS ###
 .apt_generated
 .classpath
